@@ -4,25 +4,17 @@ import { data } from '../utils/Constants'
 
 function MultipleDropDownComponent() {
 
-    let selectedValues = [];
-
     const [values, setValues] = React.useState([])
 
     const onSelect = (selectedList, selectedItem) => {
-
-        selectedValues.push(selectedItem)
-
         setValues([
             ...values,
             selectedItem
         ])
-
-        console.log(JSON.stringify(selectedValues))
     }
 
     const onRemove = (selectedList, removedItem) => {
-        console.log('selectedList: ' + JSON.stringify(selectedList))
-        console.log('removedItem: ' + JSON.stringify(removedItem))
+        setValues(values.filter((v) => v.id !== removedItem.id))
     }
 
     return (
@@ -35,7 +27,7 @@ function MultipleDropDownComponent() {
                 onSelect={onSelect}
                 selectionLimit={5}
                 closeIcon='cancel'
-                oneRemove={onRemove}
+                onRemove={onRemove}
                 placeholder='Select another measurement'
                 showCheckbox={true}
             />
